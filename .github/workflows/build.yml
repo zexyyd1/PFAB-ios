@@ -16,6 +16,6 @@ jobs:
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          sdk: v5.11.0
+          sdk: nightly
           combine: false
           target: iOS

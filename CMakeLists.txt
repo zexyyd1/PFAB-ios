@@ -19,8 +19,10 @@ include($ENV{GEODE_SDK}/cmake/CPM.cmake)
 CPMAddPackage("gh:matcool/gd-imgui-cocos#b93f08ccef778a53ebba09b20c347f6a63980119")
 target_link_libraries(${PROJECT_NAME} imgui-cocos)
 
-target_compile_options(${PROJECT_NAME} PRIVATE /O2 /Ob3 /Gw /Gy /GS-)
-set_property(TARGET ${PROJECT_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
-target_link_options(${PROJECT_NAME} PRIVATE /OPT:REF /OPT:ICF)
+if (MSVC)
+    target_compile_options(${PROJECT_NAME} PRIVATE /O2 /Ob3 /Gw /Gy /GS-)
+    set_property(TARGET ${PROJECT_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+    target_link_options(${PROJECT_NAME} PRIVATE /OPT:REF /OPT:ICF)
+endif()
 
 setup_geode_mod(${PROJECT_NAME})

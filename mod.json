@@ -1,0 +1,11 @@
+{
+    "geode": "5.11.0",
+    "gd": {
+        "win": "2.2081"
+    },
+    "version": "v1.0.0",
+    "id": "rawrotic.predictive-buffer",
+    "name": "Rawrotic's Predictive Input Buffer & Adaptive Auto Bot",
+    "developer": "rawrotic",
+    "description": "Delays early clicks and releases to the tick they work, plus a bot that plays levels for you."
+}

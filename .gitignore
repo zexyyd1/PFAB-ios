@@ -1,0 +1,12 @@
+build/
+build-*/
+out/
+.vs/
+.vscode/
+.cache/
+*.user
+CMakeUserPresets.json
+build.bat
+build-inc.bat
+BUILDING.md
+*.rar

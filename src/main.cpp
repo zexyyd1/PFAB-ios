@@ -9,11 +9,13 @@
 #include <algorithm>
 #include <cfloat>
 
-#define WIN32_LEAN_AND_MEAN
-#ifndef NOMINMAX
-    #define NOMINMAX
+#ifdef GEODE_IS_WINDOWS
+    #define WIN32_LEAN_AND_MEAN
+    #ifndef NOMINMAX
+        #define NOMINMAX
+    #endif
+    #include <Windows.h>
 #endif
-#include <Windows.h>
 
 using namespace geode::prelude;
 
@@ -61,10 +63,25 @@ static void setupStyle() {
 }
 
 static void drawMenu() {
+#ifdef GEODE_IS_WINDOWS
     static bool prevDel = false;
     bool del = (GetAsyncKeyState(VK_DELETE) & 0x8000) != 0;
     if (del && !prevDel) g_open = !g_open;
     prevDel = del;
+#else
+    // No keyboard on mobile: small translucent button to open the menu.
+    if (!g_open) {
+        ImGui::SetNextWindowPos(ImVec2(8, 8), ImGuiCond_Always);
+        ImGui::SetNextWindowBgAlpha(0.35f);
+        if (ImGui::Begin("##pfabopen", nullptr,
+                ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize |
+                ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings |
+                ImGuiWindowFlags_NoFocusOnAppearing)) {
+            if (ImGui::Button("PFAB")) g_open = true;
+        }
+        ImGui::End();
+    }
+#endif
     if (!g_open) return;
 
     int stage = cfg::stage();

@@ -31,7 +31,8 @@ namespace gdx {
     constexpr size_t kRingNoAuto = 1856;
 
     inline float bandTop(GJBaseGameLayer* layer) {
-        using Fn = float (*)(GJBaseGameLayer*);
-        return reinterpret_cast<Fn>(geode::base::get() + 0x213770)(layer);
+        // Was a raw Windows-only address (base + 0x213770). That is
+        // GJBaseGameLayer::getMaxPortalY, which Geode binds on every platform.
+        return layer->getMaxPortalY();
     }
 }

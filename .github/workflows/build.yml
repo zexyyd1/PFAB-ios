@@ -1,0 +1,22 @@
+name: Build iOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  build:
+    name: iOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the mod
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          bindings: geode-sdk/bindings
+          bindings-ref: main
+          combine: false
+          target: iOS
